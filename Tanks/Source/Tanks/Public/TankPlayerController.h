@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Tank.h"
+#include "Engine/World.h"
 #include "GameFramework/PlayerController.h"
 #include "TankPlayerController.generated.h"
 
@@ -24,4 +25,13 @@ public:
 private:
 	//Returns true if pointing at landscape
 	bool GetSightRayHitLocation(FVector& HitLocation) const;
+	UPROPERTY(EditAnywhere)
+	float CrossHairXLocation = 0.5, CrossHairYLocation = 0.333333;
+	UPROPERTY(EditAnywhere)
+	//10km range
+	float LineTraceRange = 1000000;
+	//Gets the direction the player is looking
+	bool GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const;
+	//Gets the exact point in the world the player is looking at
+	bool GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const;
 };
